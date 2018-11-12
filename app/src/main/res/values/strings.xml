@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">App Name</string>
+
+    <string-array name="projectName">
+        <item>Project1</item>
+        <item>Project2</item>
+        <item>Project3</item>
+        <item>Project4</item>
+    </string-array>
+
+    <string-array name="term">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="title">
+        <item>นาย</item>
+        <item>นางสาว</item>
+        <item>None</item>
+    </string-array>
+
+    <string-array name="branch">
+        <item>SE</item>
+        <item>MU</item>
+        <item>BI</item>
+        <item>NW</item>
+    </string-array>
+
+    <string-array name="projectName2">
+        <item>Project5</item>
+    </string-array>
+
+    <string-array name="teacherName">
+        <item>Pro.Name One</item>
+        <item>Pro.Name Two</item>
+        <item>Pro.Name Three</item>
+        <item>Pro.Name Four</item>
+        <item>None</item>
+    </string-array>
+
+    <string-array name="grade">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    <string name="title_activity_settings">Settings</string>
+</resources>
