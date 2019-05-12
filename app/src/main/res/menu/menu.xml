@@ -6,12 +6,12 @@
         android:id="@+id/schedule"
         app:showAsAction="never"></item>
 
-    <item android:title="คะแนนโปรเจค(กรรมการสอบ)"
-        android:id="@+id/grade"
+    <item android:title="ตาราสอบโปสเตอร์"
+        android:id="@+id/schedulePoster"
         app:showAsAction="never"></item>
 
-    <item android:title="คะแนนโปรเจค(อาจารย์ที่ปรึกษา)"
-        android:id="@+id/grade2"
+    <item android:title="คะแนนสอบโครงงานที่ปรึกษา"
+        android:id="@+id/result"
         app:showAsAction="never"></item>
 
     <item android:title="Logout"
