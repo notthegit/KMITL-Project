@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -82,9 +83,13 @@ public class SettingActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked){
                     activate = 1;
+                    dbOff = false;
+                    Log.i("activate", activate+"");
                 }
                 else{
                     activate = 0;
+                    dbOff = true;
+                    Log.i("activate", activate+"");
                 }
                 db();
             }
@@ -95,10 +100,15 @@ public class SettingActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked){
                     posters = 1;
+                    noPoster = false;
+                    Log.i("posters", posters+"");
                 }
                 else{
                     posters = 0;
+                    noPoster = true;
+                    Log.i("posters", posters+"");
                 }
+                db();
             }
         });
     }
@@ -109,6 +119,8 @@ public class SettingActivity extends AppCompatActivity {
                 .getInstance()
                 .getApi()
                 .settingAdmin(activate, posters);
+        Log.i("posters", posters+"");
+        Log.i("activate", activate+"");
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -170,6 +182,33 @@ public class SettingActivity extends AppCompatActivity {
 
         if (dbOff  && staff)
         {
+            if(id == R.id.schedulePoster)
+            {
+                Intent Menu = new Intent(this,SystemOfflineActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", name);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
+            if(id == R.id.schedule)
+            {
+                Intent Menu = new Intent(this,SystemOfflineActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", name);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
+            if(id == R.id.result)
+            {
+                Intent Menu = new Intent(this,UserProjectResultActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", name);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
             if(id == R.id.logout)
             {
                 Intent Menu = new Intent(this,MainActivity.class);
@@ -199,6 +238,15 @@ public class SettingActivity extends AppCompatActivity {
             if(id == R.id.logout)
             {
                 Intent Menu = new Intent(this,MainActivity.class);
+                startActivity(Menu);
+            }
+            if(id == R.id.schedulePoster)
+            {
+                Intent Menu = new Intent(this,PosterOffActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", name);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
                 startActivity(Menu);
             }
         }

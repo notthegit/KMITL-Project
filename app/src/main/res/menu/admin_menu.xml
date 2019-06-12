@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="ตาราสอบ"
+    <item android:title="ตารางสอบ"
         android:id="@+id/schedule"
         app:showAsAction="never"></item>
 
-    <item android:title="ตาราสอบโปสเตอร์"
+    <item android:title="ตารางสอบโปสเตอร์"
         android:id="@+id/schedulePoster"
         app:showAsAction="never"></item>
 

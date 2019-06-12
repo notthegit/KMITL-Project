@@ -27,6 +27,8 @@ public class Grade3Activity extends AppCompatActivity {
 
 //    public static TextView g1, g2, g3, g4, g5, g6;
     public TextView g1, g2, g3, g4, g5, g6, name;
+    public int s1, s2, s3, s4, s5, s6;
+    public String ss1, ss2, ss3, ss4, ss5, ss6;
     int time_spo, character_spo, presentation_spo, question_spo, media_spo;
     int grade_poster_proj_id = 1;
     int quality_spo;
@@ -41,6 +43,8 @@ public class Grade3Activity extends AppCompatActivity {
     public static String login_user = "";
     public static String names = "";
     public static boolean staff;
+    public Spinner grade, grade1, grade2, grade3, grade4, grade5;
+    ArrayAdapter<String> myAdapter2;
 
     public static String getProject_id() {
         return project_id;
@@ -52,12 +56,12 @@ public class Grade3Activity extends AppCompatActivity {
         setContentView(R.layout.activity_grade3);
 
         check();
-        Spinner grade = (Spinner) findViewById(R.id.textView2Spinner);
-        Spinner grade1 = (Spinner) findViewById(R.id.textView3Spinner);
-        Spinner grade2 = (Spinner) findViewById(R.id.textView4Spinner);
-        Spinner grade3 = (Spinner) findViewById(R.id.textView5Spinner);
-        Spinner grade4 = (Spinner) findViewById(R.id.textView6Spinner);
-        Spinner grade5 = (Spinner) findViewById(R.id.textView7Spinner);
+        grade = (Spinner) findViewById(R.id.textView2Spinner);
+        grade1 = (Spinner) findViewById(R.id.textView3Spinner);
+        grade2 = (Spinner) findViewById(R.id.textView4Spinner);
+        grade3 = (Spinner) findViewById(R.id.textView5Spinner);
+        grade4 = (Spinner) findViewById(R.id.textView6Spinner);
+        grade5 = (Spinner) findViewById(R.id.textView7Spinner);
         TextView projectName = (TextView) findViewById(R.id.name);
         g1 = (TextView) findViewById(R.id.g1);
         g2 = (TextView) findViewById(R.id.g2);
@@ -66,7 +70,7 @@ public class Grade3Activity extends AppCompatActivity {
         g5 = (TextView) findViewById(R.id.g5);
         g6 = (TextView) findViewById(R.id.g6);
         name = (TextView) findViewById(R.id.name);
-        ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(Grade3Activity.this,
+        myAdapter2 = new ArrayAdapter<String>(Grade3Activity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray
                 (R.array.grade));
         grade.setAdapter(myAdapter2);
@@ -107,7 +111,7 @@ public class Grade3Activity extends AppCompatActivity {
 //        Call<List<Grade3Api>> call = api.getGrade3(Integer.parseInt(id_user), Integer.parseInt(getProject_id()));
         Call<List<Grade3Api>> call = api.getGrade3(Integer.parseInt(login_user), Integer.parseInt(getProject_id()));
         Log.i("login_user", login_user);
-        Log.i("Project_id", getProject_id());
+        Log.i("Project_id", getProject_id()+" t");
         call.enqueue(new Callback<List<Grade3Api>>() {
             @Override
             public void onResponse(Call<List<Grade3Api>> call, Response<List<Grade3Api>> response) {
@@ -137,6 +141,13 @@ public class Grade3Activity extends AppCompatActivity {
                         g6.setText("คะแนนเก่า " + grades.getQuality_spo());
                         grade_poster_proj_id = grades.getId();
                         update = true;
+                        s1 = grades.getTime_spo();
+                        s2 = grades.getCharacter_spo();
+                        s3 = grades.getPresentation_spo();
+                        s4 = grades.getQuestion_spo();
+                        s5 = grades.getMedia_spo();
+                        s6 = grades.getQuality_spo();
+                        setSpinner();
                     }
                     else
                     {
@@ -548,8 +559,9 @@ public class Grade3Activity extends AppCompatActivity {
                 Call<ResponseBody> call = RetrofitClient
                         .getInstance()
                         .getApi()
-                        .saveGradePoster(grade_poster_proj_id, time_spo, character_spo, presentation_spo,
-                                question_spo, media_spo, quality_spo);
+                        .saveGradePoster(grade_poster_proj_id, time_spo, character_spo,
+                                presentation_spo, question_spo, media_spo, quality_spo,
+                                Integer.parseInt(id_user));
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -634,6 +646,24 @@ public class Grade3Activity extends AppCompatActivity {
                 Menu.putExtra("login_user", login_user);
                 startActivity(Menu);
             }
+            if(id == R.id.schedulePoster)
+            {
+                Intent Menu = new Intent(this,SystemOfflineActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", names);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
+            if(id == R.id.schedule)
+            {
+                Intent Menu = new Intent(this,SystemOfflineActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", names);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
         }
         else if (dbOff)
         {
@@ -645,6 +675,24 @@ public class Grade3Activity extends AppCompatActivity {
             if(id == R.id.result)
             {
                 Intent Menu = new Intent(this,UserProjectResultActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", names);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
+            if(id == R.id.schedulePoster)
+            {
+                Intent Menu = new Intent(this,SystemOfflineActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", names);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
+            if(id == R.id.schedule)
+            {
+                Intent Menu = new Intent(this,SystemOfflineActivity.class);
                 Menu.putExtra("id", id_user);
                 Menu.putExtra("name", names);
                 Menu.putExtra("staff", staff);
@@ -686,6 +734,15 @@ public class Grade3Activity extends AppCompatActivity {
                 Menu.putExtra("login_user", login_user);
                 startActivity(Menu);
             }
+            if(id == R.id.schedulePoster)
+            {
+                Intent Menu = new Intent(this,PosterOffActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", names);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
         }
         else if (noPoster)
         {
@@ -710,6 +767,15 @@ public class Grade3Activity extends AppCompatActivity {
             if(id == R.id.logout)
             {
                 Intent Menu = new Intent(this,MainActivity.class);
+                startActivity(Menu);
+            }
+            if(id == R.id.schedulePoster)
+            {
+                Intent Menu = new Intent(this,PosterOffActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", names);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
                 startActivity(Menu);
             }
         }
@@ -840,5 +906,56 @@ public class Grade3Activity extends AppCompatActivity {
         Menu.putExtra("staff", staff);
         Menu.putExtra("login_user", login_user);
         startActivity(Menu);
+    }
+    public void setSpinner()
+    {
+        ss1 = s1+"";
+        for(int i=0; i < myAdapter2.getCount(); i++) {
+            if(ss1.equals(myAdapter2.getItem(i)))
+            {
+                grade.setSelection(i);
+                break;
+            }
+        }
+        ss2 = s2+"";
+        for(int i=0; i < myAdapter2.getCount(); i++) {
+            if(ss2.equals(myAdapter2.getItem(i)))
+            {
+                grade1.setSelection(i);
+                break;
+            }
+        }
+        ss3 = s3+"";
+        for(int i=0; i < myAdapter2.getCount(); i++) {
+            if(ss3.equals(myAdapter2.getItem(i)))
+            {
+                grade2.setSelection(i);
+                break;
+            }
+        }
+        ss4 = s4+"";
+        for(int i=0; i < myAdapter2.getCount(); i++) {
+            if(ss4.equals(myAdapter2.getItem(i)))
+            {
+                grade3.setSelection(i);
+                break;
+            }
+        }
+        ss5 = s5+"";
+        for(int i=0; i < myAdapter2.getCount(); i++) {
+            if(ss5.equals(myAdapter2.getItem(i)))
+            {
+                grade4.setSelection(i);
+                break;
+            }
+        }
+        ss6 = s6+"";
+        for(int i=0; i < myAdapter2.getCount(); i++) {
+            if(ss6.equals(myAdapter2.getItem(i)))
+            {
+                grade5.setSelection(i);
+                break;
+            }
+        }
     }
 }

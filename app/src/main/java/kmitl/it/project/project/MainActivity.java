@@ -24,8 +24,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static kmitl.it.project.project.App.CHANNEL_1_ID;
 
@@ -74,21 +77,21 @@ public class MainActivity extends AppCompatActivity {
         testapi = Common.gettestService();
         mDatabaseHelper = new DatabaseHelper(this);
 
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.HOUR_OF_DAY, 17);
-//        calendar.set(Calendar.MINUTE, 6);
-//        calendar.set(Calendar.SECOND, 00);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 17);
+        calendar.set(Calendar.MINUTE, 6);
+        calendar.set(Calendar.SECOND, 00);
 //        Intent intent = new Intent(getApplicationContext(), AlertReceiver.class);
-//        Intent intent = new Intent(this, AlertReceiver.class);
+        Intent intent = new Intent(this, AlertReceiver.class);
 
-//        intent.setAction("MY_NOTIFICATION_MESSAGE");
-//
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        intent.setAction("MY_NOTIFICATION_MESSAGE");
 
-        //        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-//                PendingIntent.getBroadcast(this,1, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+
+                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                PendingIntent.getBroadcast(this,1, intent, PendingIntent.FLAG_UPDATE_CURRENT));
     }
 
     public void clickExit(View view){
@@ -194,9 +197,9 @@ public class MainActivity extends AppCompatActivity {
     public void clickAlarm(View view){
 
         Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://10.0.2.2:8000/api/")
+                .baseUrl("http://10.0.2.2:8000/api/")
 //                .baseUrl("http://127.0.0.1:8000/api/")
-                .baseUrl("http://10.110.197.11/api/")
+//                .baseUrl("http://10.110.197.11/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api = retrofit.create(Api.class);
@@ -333,9 +336,9 @@ public class MainActivity extends AppCompatActivity {
         PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 1,
                 alarm, PendingIntent.FLAG_UPDATE_CURRENT);
 
-//        String date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
+       String date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
 //        String date = "21/05/2018";
-        String date = "23/05/2018";
+//        String date = "23/05/2018";
         String[] parts2 = date.split("/");
         int day = Integer.parseInt(parts2[0]);
         int day2 = 2 + day;

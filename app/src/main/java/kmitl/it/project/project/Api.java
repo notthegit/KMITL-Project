@@ -25,7 +25,8 @@ public interface Api {
             @Field("analysis") int analysis,
             @Field("quantity") int quantity,
             @Field("levels") int levels,
-            @Field("quality") int quality
+            @Field("quality") int quality,
+            @Field("teacher_id") int teacher_id
     );
 
     @FormUrlEncoded
@@ -53,7 +54,8 @@ public interface Api {
             @Field("advice") int advice,
             @Field("improve") int improve,
             @Field("quality_report") int quality_report,
-            @Field("quality_project") int quality_project
+            @Field("quality_project") int quality_project,
+            @Field("teacher_id") int teacher_id
     );
 
     @FormUrlEncoded
@@ -78,7 +80,8 @@ public interface Api {
             @Field("presentation_spo") int presentation_spo,
             @Field("question_spo") int question_spo,
             @Field("media_spo") int media_spo,
-            @Field("quality_spo") int quality_spo
+            @Field("quality_spo") int quality_spo,
+            @Field("teacher_id") int teacher_id
     );
 
     @FormUrlEncoded

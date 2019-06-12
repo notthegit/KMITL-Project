@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">App Name</string>
+    <string name="app_name">Mobile Project Schedule And Grade Application</string>
 
     <string-array name="projectName">
         <item>Project1</item>

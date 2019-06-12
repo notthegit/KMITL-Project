@@ -43,10 +43,10 @@ public class AlertReceiver extends BroadcastReceiver {
         intent1 = intent;
         Log.i("Notify", "time");
         note = "asss";
-//        NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
-//        Intent repeating_intent = new Intent(context, UserScheduleActivity.class);
-//        repeating_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+        Intent repeating_intent = new Intent(context, UserScheduleActivity.class);
+        repeating_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 //        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "0")
@@ -140,8 +140,8 @@ public class AlertReceiver extends BroadcastReceiver {
 
     public void alarm(Context context, Intent intent) {
 
-//        String date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
-        String date = "14/12/2017";
+        String date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
+//        String date = "14/12/2017";
         String[] parts2 = date.split("/");
         int day = Integer.parseInt(parts2[0]);
         int day2 = 2 + day;

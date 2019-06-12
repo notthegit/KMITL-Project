@@ -25,7 +25,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Grade2Activity extends AppCompatActivity {
 
-    public TextView g1, g2, g3, g4, g5, g6, g7, g8, name;
+    public TextView g1, g2, g3, g4, g5, g6, g7, name;
+    public int s1, s2, s3, s4, s5, s6, s7;
+    public String ss1, ss2, ss3, ss4, ss5, ss6, ss7;
     int propose, planning, tool, advice, improve, quality_report;
     int grade_advisor_proj_id = 1;
     int quality_project;
@@ -39,6 +41,8 @@ public class Grade2Activity extends AppCompatActivity {
     public static String names = "";
     public static String login_user = "";
     public static boolean staff;
+    public Spinner grade, grade1, grade2, grade3, grade4, grade5, grade6;
+    ArrayAdapter<String> myAdapter2;
 
     public static String getProject_id() {
         return project_id;
@@ -48,15 +52,15 @@ public class Grade2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grade2);
-        Spinner grade = (Spinner) findViewById(R.id.textView2Spinner);
-        Spinner grade1 = (Spinner) findViewById(R.id.textView3Spinner);
-        Spinner grade2 = (Spinner) findViewById(R.id.textView4Spinner);
-        Spinner grade3 = (Spinner) findViewById(R.id.textView5Spinner);
-        Spinner grade4 = (Spinner) findViewById(R.id.textView6Spinner);
-        Spinner grade5 = (Spinner) findViewById(R.id.textView7Spinner);
-        Spinner grade6 = (Spinner) findViewById(R.id.textView8Spinner);
+        grade = (Spinner) findViewById(R.id.textView2Spinner);
+        grade1 = (Spinner) findViewById(R.id.textView3Spinner);
+        grade2 = (Spinner) findViewById(R.id.textView4Spinner);
+        grade3 = (Spinner) findViewById(R.id.textView5Spinner);
+        grade4 = (Spinner) findViewById(R.id.textView6Spinner);
+        grade5 = (Spinner) findViewById(R.id.textView7Spinner);
+        grade6 = (Spinner) findViewById(R.id.textView8Spinner);
         TextView projectName = (TextView) findViewById(R.id.name);
-        ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(Grade2Activity.this,
+        myAdapter2 = new ArrayAdapter<String>(Grade2Activity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray
                 (R.array.grade));
         grade.setAdapter(myAdapter2);
@@ -101,12 +105,9 @@ public class Grade2Activity extends AppCompatActivity {
                 .build();
         Api api = retrofit.create(Api.class);
         Log.i("test", id_user);
-//        Call<List<Grade3Api>> call = api.getGrade3(33, getProject_id());
-//        Call<List<Grade2Api>> call = api.getGrade2(33, Integer.parseInt(getProject_id()));
-//        Call<List<Grade2Api>> call = api.getGrade2(Integer.parseInt(id_user), Integer.parseInt(getProject_id()));
         Call<List<Grade2Api>> call = api.getGrade2(Integer.parseInt(login_user), Integer.parseInt(getProject_id()));
         Log.i("login_user", login_user);
-        Log.i("Project_id", getProject_id());
+        Log.i("Project_id", getProject_id()+" t");
         call.enqueue(new Callback<List<Grade2Api>>() {
             @Override
             public void onResponse(Call<List<Grade2Api>> call, Response<List<Grade2Api>> response) {
@@ -138,6 +139,14 @@ public class Grade2Activity extends AppCompatActivity {
                         g7.setText("คะแนนเก่า " + grades.getQuality_project());
                         grade_advisor_proj_id = grades.getId();
                         update = true;
+                        s1 = grades.getPropose();
+                        s2 = grades.getPlanning();
+                        s3 = grades.getTool();
+                        s4 = grades.getAdvice();
+                        s5 = grades.getImprove();
+                        s6 = grades.getQuality_report();
+                        s7 = grades.getQuality_project();
+                        setSpinner();
                     }
                     else
                     {
@@ -158,6 +167,7 @@ public class Grade2Activity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Grade2Api>> call, Throwable t) {
                 g1.setText(t.getMessage()+ "");
+                Log.i("error", t.getMessage()+ "");
 //                g1.setText("ไม่สามารถเชื่อมต่อกับฐานข้อมูล");
                 g2.setText("id_user "+id_user);
                 g3.setText("project_id "+project_id);
@@ -652,6 +662,24 @@ public class Grade2Activity extends AppCompatActivity {
                 Menu.putExtra("login_user", login_user);
                 startActivity(Menu);
             }
+            if(id == R.id.schedulePoster)
+            {
+                Intent Menu = new Intent(this,SystemOfflineActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", names);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
+            if(id == R.id.schedule)
+            {
+                Intent Menu = new Intent(this,SystemOfflineActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", names);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
         }
         else if (dbOff)
         {
@@ -663,6 +691,24 @@ public class Grade2Activity extends AppCompatActivity {
             if(id == R.id.result)
             {
                 Intent Menu = new Intent(this,UserProjectResultActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", names);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
+            if(id == R.id.schedulePoster)
+            {
+                Intent Menu = new Intent(this,SystemOfflineActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", names);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
+            if(id == R.id.schedule)
+            {
+                Intent Menu = new Intent(this,SystemOfflineActivity.class);
                 Menu.putExtra("id", id_user);
                 Menu.putExtra("name", names);
                 Menu.putExtra("staff", staff);
@@ -704,6 +750,15 @@ public class Grade2Activity extends AppCompatActivity {
                 Menu.putExtra("login_user", login_user);
                 startActivity(Menu);
             }
+            if(id == R.id.schedulePoster)
+            {
+                Intent Menu = new Intent(this,PosterOffActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", names);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
         }
         else if (noPoster)
         {
@@ -728,6 +783,15 @@ public class Grade2Activity extends AppCompatActivity {
             if(id == R.id.logout)
             {
                 Intent Menu = new Intent(this,MainActivity.class);
+                startActivity(Menu);
+            }
+            if(id == R.id.schedulePoster)
+            {
+                Intent Menu = new Intent(this,PosterOffActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", names);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
                 startActivity(Menu);
             }
         }
@@ -869,7 +933,8 @@ public class Grade2Activity extends AppCompatActivity {
                         .getInstance()
                         .getApi()
                         .saveGradeAdvisor(grade_advisor_proj_id, propose, planning, tool,
-                                advice, improve, quality_report, quality_project);
+                                advice, improve, quality_report, quality_project,
+                                Integer.parseInt(id_user));
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -952,6 +1017,66 @@ public class Grade2Activity extends AppCompatActivity {
         Menu.putExtra("staff", staff);
         Menu.putExtra("login_user", login_user);
         startActivity(Menu);
+    }
+
+    public void setSpinner()
+    {
+        ss1 = s1+"";
+        for(int i=0; i < myAdapter2.getCount(); i++) {
+            if(ss1.equals(myAdapter2.getItem(i)))
+            {
+                grade.setSelection(i);
+                break;
+            }
+        }
+        ss2 = s2+"";
+        for(int i=0; i < myAdapter2.getCount(); i++) {
+            if(ss2.equals(myAdapter2.getItem(i)))
+            {
+                grade1.setSelection(i);
+                break;
+            }
+        }
+        ss3 = s3+"";
+        for(int i=0; i < myAdapter2.getCount(); i++) {
+            if(ss3.equals(myAdapter2.getItem(i)))
+            {
+                grade2.setSelection(i);
+                break;
+            }
+        }
+        ss4 = s4+"";
+        for(int i=0; i < myAdapter2.getCount(); i++) {
+            if(ss4.equals(myAdapter2.getItem(i)))
+            {
+                grade3.setSelection(i);
+                break;
+            }
+        }
+        ss5 = s5+"";
+        for(int i=0; i < myAdapter2.getCount(); i++) {
+            if(ss5.equals(myAdapter2.getItem(i)))
+            {
+                grade4.setSelection(i);
+                break;
+            }
+        }
+        ss6 = s6+"";
+        for(int i=0; i < myAdapter2.getCount(); i++) {
+            if(ss6.equals(myAdapter2.getItem(i)))
+            {
+                grade5.setSelection(i);
+                break;
+            }
+        }
+        ss7 = s7+"";
+        for(int i=0; i < myAdapter2.getCount(); i++) {
+            if(ss7.equals(myAdapter2.getItem(i)))
+            {
+                grade6.setSelection(i);
+                break;
+            }
+        }
     }
 
 }

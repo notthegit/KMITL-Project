@@ -204,12 +204,48 @@ public class UserProjectResultActivity extends AppCompatActivity {
                 Menu.putExtra("login_user", login_user);
                 startActivity(Menu);
             }
+            if(id == R.id.schedulePoster)
+            {
+                Intent Menu = new Intent(this,SystemOfflineActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", name);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
+            if(id == R.id.schedule)
+            {
+                Intent Menu = new Intent(this,SystemOfflineActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", name);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
         }
         else if (dbOff)
         {
             if(id == R.id.logout)
             {
                 Intent Menu = new Intent(this,MainActivity.class);
+                startActivity(Menu);
+            }
+            if(id == R.id.schedulePoster)
+            {
+                Intent Menu = new Intent(this,SystemOfflineActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", name);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
+            if(id == R.id.schedule)
+            {
+                Intent Menu = new Intent(this,SystemOfflineActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", name);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
                 startActivity(Menu);
             }
         }
@@ -238,6 +274,15 @@ public class UserProjectResultActivity extends AppCompatActivity {
                 Intent Menu = new Intent(this,MainActivity.class);
                 startActivity(Menu);
             }
+            if(id == R.id.schedulePoster)
+            {
+                Intent Menu = new Intent(this,PosterOffActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", name);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
+                startActivity(Menu);
+            }
         }
         else if (noPoster)
         {
@@ -253,6 +298,15 @@ public class UserProjectResultActivity extends AppCompatActivity {
             if(id == R.id.logout)
             {
                 Intent Menu = new Intent(this,MainActivity.class);
+                startActivity(Menu);
+            }
+            if(id == R.id.schedulePoster)
+            {
+                Intent Menu = new Intent(this,PosterOffActivity.class);
+                Menu.putExtra("id", id_user);
+                Menu.putExtra("name", name);
+                Menu.putExtra("staff", staff);
+                Menu.putExtra("login_user", login_user);
                 startActivity(Menu);
             }
         }

@@ -14,11 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Grade3Activity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".ProjectDetail"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".MainActivity"
+        <activity android:name=".PosterOffActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Grade3Activity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ProjectDetail"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,21 +31,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Grade2Activity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".GradeActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".SettingActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".SystemOfflineActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".UserScheduleActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".UserProjectResultActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".UserPosterActivity"
-            android:screenOrientation="landscape"/>
-        <receiver android:name=".AlertReceiver"
+        <activity
+            android:name=".Grade2Activity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".GradeActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".SettingActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".SystemOfflineActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".UserScheduleActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".UserProjectResultActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".UserPosterActivity"
+            android:screenOrientation="landscape" />
+
+        <receiver
+            android:name=".AlertReceiver"
             android:enabled="true"
             android:exported="false" />
     </application>
